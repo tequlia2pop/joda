@@ -1,0 +1,94 @@
+= 用户指南
+Doc Writer <tequlia2pop@gmail.com>
+:toc: macro
+:homepage: http://www.joda.org/joda-time/userguide.html
+
+== 介绍
+
+Joda-Time 就像一个冰山，它的 9/10th 是不可见的用户代码。许多，或许大多数应用程序永远不需要看到表面以下的内容。本文档为普通用户提供了 Joda-Time API 的介绍，而不是将来的 API 开发人员。
+
+大部分文本专用于显示最常用的使用场景的代码片段，在这些场景中使用库类。特别是，我们介绍了关键的 `DateTime`，`Interval`，`Duration` 和 `Period` 类的用法。
+
+我们来看看格式化和解析的重要主题和一些更高级的主题。
+
+toc::[]
+
+== Architecture Overview
+=== Instants
+==== Fields
+==== Properties
+=== Intervals
+=== Durations
+=== Periods
+=== Chronology
+=== TimeZones
+=== Interface usage
+=== Package structure
+
+== Working with DateTime
+=== Construction
+
+=== JDK 互操作性
+
+`DateTime`类有一个构造函数，它接受一个 `Object` 作为输入。特别是这个构造函数可以传递一个 JDK `Date`，JDK `Calendar` 或 JDK `GregorianCalendar`（它也接受一个 `ISO8601` 格式的字符串，或 `Long` 对象表示毫秒）。这是与 JDK 的互操作性的一半。与 JDK 的互操作性的另一半由返回 JDK 对象的 `DateTime` 方法提供。
+
+因此，可以如下执行 Joda `DateTime` 和 JDK `Date` 之间的互转换
+
+[source,java,indent=0]
+[subs="verbatim,quotes"]
+----
+    // from Joda to JDK
+    DateTime dt = new DateTime();
+    Date jdkDate = dt.toDate();
+
+    // from JDK to Joda
+    dt = new DateTime(jdkDate);
+----
+
+同样，对于 JDK `Calendar`：
+
+[source,java,indent=0]
+[subs="verbatim,quotes"]
+----
+    // from Joda to JDK
+    DateTime dt = new DateTime();
+    Calendar jdkCal = dt.toCalendar(Locale.CHINESE);
+
+    // from JDK to Joda
+    dt = new DateTime(jdkCal);
+----
+
+还有 JDK `GregorianCalendar`：
+
+[source,java,indent=0]
+[subs="verbatim,quotes"]
+----
+    // from Joda to JDK
+    DateTime dt = new DateTime();
+    GregorianCalendar jdkGCal = dt.toGregorianCalendar();
+
+    // from JDK to Joda
+    dt = new DateTime(jdkGCal);
+----
+
+=== Querying DateTimes
+==== Acessing fields
+==== Date fields
+==== Time fields
+=== Manipulating DateTimes
+==== Modifying fields
+==== DateTime methods
+==== Using a MutableDateTime
+=== Changing TimeZone
+=== Changing Chronology
+
+== Input and Output
+=== Formatters
+=== Standard Formatters
+=== Custom Formatters
+=== Freaky Formatters
+
+== Advanced features
+=== Change the Current Time
+=== Converters
+=== Security
